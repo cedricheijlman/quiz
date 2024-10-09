@@ -7,25 +7,53 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="resultatenContainer">
+    <div class="mainContainer">
       <h1>Resultaten Lijst 🎲</h1>
-      <button class="startKnop">Bekijk resultaten</button>
       <h3>Scores</h3>
       <div class="scoreBar">
-        <div class="innerScoreBar">25%</div>
+        <div class="innerScoreBar"><span>25%</span></div>
       </div>
-      <button class="startKnop">Opnieuw</button>
+      <div class="resultatenKnoppen">
+        <a class="startKnop">Bekijk resultaten</a>
+        <a class="startKnop">Opnieuw</a>
+      </div>
+      <div style="display: none" class="modalOverlay">
+        <div class="resultatenModal">
+          <img
+            class="closeModalIcon"
+            alt="Close Modal Icon"
+            src="./images/close-modal-icon.png"
+          />
+          <h4>Mijn resultaten</h4>
+          <div class="antwoordenLijst">
+            <div class="antwoord">
+              <h5>Vraag 1: jifpfjqwpojqw</h5>
+              <div class="optieLijst">
+                <button class="geselecteerdGoed">Optie 1</button>
+                <button>Optie 2</button>
+                <button>Optie 3</button>
+                <button>Optie 4</button>
+              </div>
+            </div>
 
-      <div class="popupAntwoorden">
-        <div class="antwoordenBox">
-          <h4>Antwoorden</h4>
-          <div class="antwoord">
-            <h5>Vraag 1: jifpfjqwpojqw</h5>
-            <div class="optieLijst">
-              <button class="geselecteerdGoed">Optie 1</button>
-              <button>Optie 2</button>
-              <button>Optie 3</button>
-              <button>Optie 4</button>
+            <div class="antwoord">
+              <h5>Vraag 1: jifpfjqwpojqw</h5>
+              <div class="optieLijst">
+                <button class="geselecteerdGoed">Optie 1</button>
+                <button>Optie 2</button>
+                <button>Optie 3</button>
+                <button>Optie 4</button>
+              </div>
+            </div>
+
+            <div class="antwoord">
+              <h5>Vraag 1: jifpfjqwpojqw</h5>
+              <div class="optieLijst">
+                <button class="geselecteerdGoed">Optie 1</button>
+                <button>Optie 2</button>
+                <button>Optie 3</button>
+                <button>Optie 4</button>
+              </div>
             </div>
           </div>
         </div>
