@@ -15,6 +15,7 @@
 
 .homescreenContainer h1 {
   font-size: 80px;
+  text-align: center;
 }
 
 .startKnop {
@@ -26,22 +27,21 @@
   margin-top: 35px;
   border: none;
   display: inline-block;
-  background-color: #ffcfa3; /* Green background */
-  color: black; /* White text */
+  background-color: #ffcfa3;
+  color: black; 
   text-align: center;
-  text-decoration: none; /* Remove underlining */
+  text-decoration: none;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth hover transition */
+  transition: background-color 0.3s ease;
 }
 
 .categorieLijst {
-  display: flex;
-  margin-top: 25px;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+  margin-top: 10px;
 }
 
 #options {
@@ -53,20 +53,25 @@
 }
 
 .categorieKeuze {
-  background-color: #ffcfa3;
-  padding: 35px 50px;
-  border-radius: 100px;
-  font-size: 40px;
-  margin: 14px 15px;
-  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4b183;
+  color: black;
+  text-decoration: none;
+  padding: 30px;
+  border-radius: 50px;
+  width: 220px;
+  height: 150px;
+  font-weight: bold;
+  font-size: 18px;
   text-align: center;
-  flex: 0 0 25%;
-  cursor: pointer;
-  transition: all 0.3s;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .categorieKeuze:hover {
-  transform: scale(1.06);
+  background-color: #ee9b58;
+  transform: scale(1.05);
 }
 
 .resultatenContainer {
@@ -80,4 +85,35 @@
 
 .resultatenContainer h1 {
   font-size: 100px;
+}
+
+.gameIcon {
+  position: fixed;
+  bottom: 100px;
+  right: 110px;
+  width: 290px;
+  height: auto;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.gameIcon:hover {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .categorieLijst {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .categorieLijst {
+    grid-template-columns: 1fr;
+  }
+
+  .gameIcon {
+    width: 150px;
+  }
 }
