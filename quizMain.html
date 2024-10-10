@@ -16,16 +16,29 @@
       </head>
       <body>
         <div class="mainContainer">
-          <h1>Vraag 1</h1>
-          <p id="question-text"></p>
+          <p id="vraagNummer">Vraag 1</p>
+          <h1 id="question-text"></h1>
           <div id="options"></div>
+          <button
+            style="display: none"
+            id="volgendeKnop"
+            onclick="naarVolgendeVraag()"
+            class="volgendeKnop"
+          >
+            Volgende
+          </button>
         </div>
+
+        <img src="images/game-icon.png" alt="Game Icon" class="gameIcon" />
 
         <script src="script.js"></script>
 
         <script>
+          const urlParams = new URLSearchParams(window.location.search);
+          // Geef de waarde van de parameter terug
+          let categorieNummer = urlParams.get("categorieNummer");
           // Fetch questions for category 1 on page load (example)
-          fetchQuestions(2); // Change '1' to the category you want
+          fetchQuestions(categorieNummer); // Change '1' to the category you want
         </script>
       </body>
     </html>

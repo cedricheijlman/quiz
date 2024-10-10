@@ -1,6 +1,8 @@
 let currentQuestionIndex = 0;
 let correctAnswers = 0;
 let questions = [];
+let beantwoord = false;
+let gebruikersAntwoorden = [];
 
 let x = 0;
 
@@ -39,9 +41,46 @@ function showQuestion(index) {
 
   questions[index].options.forEach((option, i) => {
     optionsElement.innerHTML += `
-            <a class="startKnop" id="option${i}">${option}</a>
+            <a class="startKnop" onclick="checkAntwoord(this)" id="option${i}">${option}</a>
         `;
   });
 
   nextButton.style.display = "none";
+}
+
+function checkAntwoord(knop) {
+  let antwoordGebruiker = knop.textContent;
+  let volgendeKnop = document.getElementById("volgendeKnop");
+
+  if (beantwoord == false) {
+    if (questions[currentQuestionIndex].correct_answer == antwoordGebruiker) {
+      knop.classList.add("goedeAntwoord");
+      beantwoord = true;
+      volgendeKnop.style.display = "flex";
+      gebruikersAntwoorden.push({ antwoordGebruiker: antwoordGebruiker });
+    } else {
+      knop.classList.add("fouteAntwoord");
+      beantwoord = true;
+      volgendeKnop.style.display = "flex";
+      gebruikersAntwoorden.push({ antwoordGebruiker: antwoordGebruiker });
+    }
+  }
+}
+
+function naarVolgendeVraag() {
+  if (currentQuestionIndex !== 10) {
+    currentQuestionIndex = currentQuestionIndex + 1;
+    let vraagNummerText = document.getElementById("vraagNummer");
+    let volgendeKnop = document.getElementById("volgendeKnop");
+
+    vraagNummerText.textContent = "Vraag " + (currentQuestionIndex + 1);
+    volgendeKnop.style.display = "none";
+    beantwoord = false;
+    showQuestion(currentQuestionIndex);
+  }
+}
+
+function stuurNaarVolgendePagina(nummer) {
+  window.location.href = `quizMain.html?categorieNummer=${nummer}`;
+  console.log("test");
 }
