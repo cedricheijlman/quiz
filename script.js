@@ -78,9 +78,9 @@ function checkAntwoord(knop) {
           correct: "true", // Stuur het als string "true" of "false"
         }),
       })
-        .then((response) => response.json())
+        .then((response) => response.text()) // Parse as plain text
         .then((data) => {
-          console.log("Server response:", data);
+          console.log("Server response:", data); // Expecting a string ("True" or "False")
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -100,9 +100,9 @@ function checkAntwoord(knop) {
           correct: "false", // Stuur het als string "true" of "false"
         }),
       })
-        .then((response) => response.json())
+        .then((response) => response.text()) // Parse as plain text
         .then((data) => {
-          console.log("Server response:", data);
+          console.log("Server response:", data); // Expecting a string ("True" or "False")
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -112,7 +112,7 @@ function checkAntwoord(knop) {
 }
 
 function naarVolgendeVraag() {
-  if (currentQuestionIndex < 8) {
+  if (currentQuestionIndex < 9) {
     currentQuestionIndex = currentQuestionIndex + 1;
     let vraagNummerText = document.getElementById("vraagNummer");
     let volgendeKnop = document.getElementById("volgendeKnop");
@@ -127,6 +127,8 @@ function naarVolgendeVraag() {
       JSON.stringify(gebruikersAntwoorden)
     );
 
+    localStorage.setItem("Vragen", JSON.stringify(questions));
+
     window.location.href = "resultatenLijst.html";
   }
 }
@@ -136,4 +138,78 @@ function stuurNaarVolgendePagina(nummer) {
   console.log("test");
 }
 
-function laadResultaten() {}
+function laadResultaten() {
+  let antwoordenLijst = document.getElementById("antwoordenLijst");
+  let gebruikersantwoorden = localStorage.getItem("gebruikersAntwoorden");
+  let vragen = localStorage.getItem("Vragen");
+  vragen = JSON.parse(vragen);
+  gebruikersantwoorden = JSON.parse(gebruikersantwoorden);
+  let aantalGoedeVragen = 0;
+
+  // Loop through the vragen array and generate HTML for each question
+  // Loop through the vragen array and generate HTML for each question
+  vragen.forEach((vraag, index) => {
+    // Create a new div for each vraag
+    const vraagDiv = document.createElement("div");
+    vraagDiv.classList.add("antwoord");
+
+    // Create a header for the vraag
+    const vraagTitle = document.createElement("h5");
+    vraagTitle.textContent = `Vraag ${index + 1}: ${vraag.question}`;
+    vraagDiv.appendChild(vraagTitle);
+
+    // Create a div to contain the options
+    const optieLijst = document.createElement("div");
+    optieLijst.classList.add("optieLijst");
+
+    // Get the user's answer for this question
+    const gebruikersAntwoord = gebruikersantwoorden[index]?.antwoordGebruiker;
+
+    // Loop through the options and create buttons
+    vraag.options.forEach((option) => {
+      const optionButton = document.createElement("button");
+      optionButton.textContent = option;
+
+      if (option == vraag.correct_answer) {
+        optionButton.classList.add("goedeAntwoord");
+        optionButton.style.border = "1px solid black";
+      }
+
+      // Check if this option is the user's answer and correct or incorrect
+      if (option == gebruikersAntwoord) {
+        // Highlight the user's answer
+        if (option == vraag.correct_answer) {
+          optionButton.classList.add("goedeAntwoord"); // Correct answer (green)
+          aantalGoedeVragen++;
+        } else {
+          optionButton.classList.add("fouteAntwoord"); // Incorrect answer (red)
+        }
+      }
+
+      // Append the button to the optieLijst div
+      optieLijst.appendChild(optionButton);
+    });
+
+    // Append the options to the vraagDiv
+    vraagDiv.appendChild(optieLijst);
+
+    // Append the vraagDiv to the antwoordenLijst container
+    antwoordenLijst.appendChild(vraagDiv);
+  });
+
+  let aantalVragen = vragen.length;
+
+  let percentageGoedeAntwoorden = (aantalGoedeVragen / aantalVragen) * 100;
+
+  let innerScoreBar = document.getElementById("innerScoreBar");
+  let scoreText = document.getElementById("scoreText");
+
+  scoreText.textContent = percentageGoedeAntwoorden + "%";
+  innerScoreBar.style.width = `${percentageGoedeAntwoorden}%`;
+
+  if (percentageGoedeAntwoorden < 60) {
+    innerScoreBar.style.backgroundColor = "#ff0000";
+  } else {
+    innerScoreBar.style.backgroundColor = "#008000";
+  }
+}

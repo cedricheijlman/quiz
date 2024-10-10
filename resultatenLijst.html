@@ -11,11 +11,13 @@
       <h1>Resultaten Lijst 🎲</h1>
       <h3>Scores</h3>
       <div class="scoreBar">
-        <div class="innerScoreBar"><span>25%</span></div>
+        <div id="innerScoreBar" class="innerScoreBar">
+          <span id="scoreText">25%</span>
+        </div>
       </div>
       <div class="resultatenKnoppen">
         <a id="resultatenKnop" class="startKnop">Bekijk resultaten</a>
-        <a class="startKnop">Opnieuw</a>
+        <a href="index.html" class="startKnop">Opnieuw</a>
       </div>
       <div id="modalOverlay" style="display: none" class="modalOverlay">
         <div class="resultatenModal">
@@ -26,22 +28,14 @@
             src="./images/close-modal-icon.png"
           />
           <h4>Mijn resultaten</h4>
-          <div id="antwoordenLijst" class="antwoordenLijst">
-            <div class="antwoord">
-              <h5>Vraag 1: jifpfjqwpojqw</h5>
-              <div class="optieLijst">
-                <button class="geselecteerdGoed">Optie 1</button>
-                <button>Optie 2</button>
-                <button>Optie 3</button>
-                <button>Optie 4</button>
-              </div>
-            </div>
-          </div>
+          <div id="antwoordenLijst" class="antwoordenLijst"></div>
         </div>
       </div>
     </div>
 
-    <script src="script.js">
+    <script src="script.js"></script>
+
+    <script>
       laadResultaten();
     </script>
   </body>
