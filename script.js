@@ -2,6 +2,19 @@ let currentQuestionIndex = 0;
 let correctAnswers = 0;
 let questions = [];
 
+let x = 0;
+
+let resultatenKnop = document.getElementById("resultatenKnop");
+let modalOverlay = document.getElementById("modalOverlay");
+let wegklikken = document.getElementById("wegklikken");
+
+resultatenKnop.addEventListener("click", () => {
+  modalOverlay.style.display = "flex";
+});
+wegklikken.addEventListener("click", () => {
+  modalOverlay.style.display = "none";
+});
+
 // Function to fetch questions for a specific category
 function fetchQuestions(categoryId) {
   fetch(`http://127.0.0.1:5000/get-questions/${categoryId}`)

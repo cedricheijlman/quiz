@@ -14,12 +14,13 @@
         <div class="innerScoreBar"><span>25%</span></div>
       </div>
       <div class="resultatenKnoppen">
-        <a class="startKnop">Bekijk resultaten</a>
+        <a id="resultatenKnop" class="startKnop">Bekijk resultaten</a>
         <a class="startKnop">Opnieuw</a>
       </div>
-      <div style="display: none" class="modalOverlay">
+      <div id="modalOverlay" style="display: none" class="modalOverlay">
         <div class="resultatenModal">
           <img
+            id="wegklikken"
             class="closeModalIcon"
             alt="Close Modal Icon"
             src="./images/close-modal-icon.png"
@@ -59,5 +60,7 @@
         </div>
       </div>
     </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
