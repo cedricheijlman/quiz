@@ -58,17 +58,51 @@ function checkAntwoord(knop) {
       beantwoord = true;
       volgendeKnop.style.display = "flex";
       gebruikersAntwoorden.push({ antwoordGebruiker: antwoordGebruiker });
+
+      fetch("http://127.0.0.1:5000/check-answer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          correct: "true", // Stuur het als string "true" of "false"
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Server response:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     } else {
       knop.classList.add("fouteAntwoord");
       beantwoord = true;
       volgendeKnop.style.display = "flex";
       gebruikersAntwoorden.push({ antwoordGebruiker: antwoordGebruiker });
+
+      fetch("http://127.0.0.1:5000/check-answer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          correct: "false", // Stuur het als string "true" of "false"
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Server response:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
   }
 }
 
 function naarVolgendeVraag() {
-  if (currentQuestionIndex !== 10) {
+  if (currentQuestionIndex < 9) {
     currentQuestionIndex = currentQuestionIndex + 1;
     let vraagNummerText = document.getElementById("vraagNummer");
     let volgendeKnop = document.getElementById("volgendeKnop");
@@ -77,6 +111,13 @@ function naarVolgendeVraag() {
     volgendeKnop.style.display = "none";
     beantwoord = false;
     showQuestion(currentQuestionIndex);
+  } else {
+    localStorage.setItem(
+      "gebruikersAntwoorden",
+      JSON.stringify(gebruikersAntwoorden)
+    );
+
+    window.location.href = "resultatenLijst.html";
   }
 }
 
@@ -84,3 +125,5 @@ function stuurNaarVolgendePagina(nummer) {
   window.location.href = `quizMain.html?categorieNummer=${nummer}`;
   console.log("test");
 }
+
+function laadResultaten() {}
