@@ -1,7 +1,3 @@
-import serial
-import sys
-import time
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
@@ -45,12 +41,6 @@ def get_questions_by_category(category_id):
 
     return jsonify(questions)
 
-with serial.Serial(port="COM3", baudrate=115200, bytesize=8, parity='N', stopbits=1,
-                   timeout=1) as serial_port:
-
-    UserInput = input("True or fucking False ") + "\r"
-    data = f"{UserInput}\r"
-    serial_port.write(data.encode())
 
 if __name__ == '__main__':
     app.run(debug=True)
@@ -58,11 +48,3 @@ if __name__ == '__main__':
 
 
 
-
-
-with serial.Serial(port="COM3", baudrate=115200, bytesize=8, parity='N', stopbits=1,
-                   timeout=1) as serial_port:
-
-    UserInput = input("True or fucking False ") + "\r"
-    data = f"{UserInput}\r"
-    serial_port.write(data.encode())
