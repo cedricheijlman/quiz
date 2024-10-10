@@ -139,7 +139,6 @@ function stuurNaarVolgendePagina(nummer) {
 function laadResultaten() {}
 
 // share results
-
 const shareButton = document.getElementById("shareButton");
 
 shareButton.addEventListener("click", () => {
@@ -157,7 +156,6 @@ shareButton.addEventListener("click", () => {
   } else {
     alert("Your browser doesn't support the Web Share API. You can manually copy the link below.");
     console.log(quizResultLink);
-    // You could also show the link in a modal or alert for manual sharing
   }
 });
 
