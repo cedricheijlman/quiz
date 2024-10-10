@@ -213,3 +213,27 @@ function laadResultaten() {
     innerScoreBar.style.backgroundColor = "#008000";
   }
 }
+
+// share results
+const shareButton = document.getElementById("shareButton");
+shareButton.addEventListener("click", () => {
+  const quizResultLink = `${window.location.href}?result=${encodeURIComponent(
+    JSON.stringify(gebruikersAntwoorden)
+  )}`;
+  if (navigator.share) {
+    navigator
+      .share({
+        title: "My Quiz Results",
+        text: "Check out my quiz results!",
+        url: quizResultLink,
+      })
+      .then(() => console.log("Successfully shared"))
+      .catch((error) => console.error("Error sharing:", error));
+  } else {
+    alert(
+      "Your browser doesn't support the Web Share API. You can manually copy the link below."
+    );
+    console.log(quizResultLink);
+    // You could also show the link in a modal or alert for manual sharing
+  }
+});
