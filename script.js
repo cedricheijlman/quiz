@@ -4,12 +4,12 @@ let questions = [];
 let beantwoord = false;
 let gebruikersAntwoorden = [];
 
-let x = 0;
-
+// Elements for results modal
 let resultatenKnop = document.getElementById("resultatenKnop");
 let modalOverlay = document.getElementById("modalOverlay");
 let wegklikken = document.getElementById("wegklikken");
 
+// Add event listeners for modal
 resultatenKnop.addEventListener("click", () => {
   modalOverlay.style.display = "flex";
 });
@@ -25,6 +25,7 @@ function fetchQuestions(categoryId) {
       questions = data;
       showQuestion(currentQuestionIndex); // Show the first question
       console.log(data);
+      updateProgressBar(); // Initialize progress bar
     })
     .catch((error) => console.error("Error fetching questions:", error));
 }
@@ -33,7 +34,7 @@ function fetchQuestions(categoryId) {
 function showQuestion(index) {
   const questionElement = document.getElementById("question-text");
   const optionsElement = document.getElementById("options");
-  const nextButton = document.getElementById("next-button");
+  const volgendeKnop = document.getElementById("volgendeKnop");
 
   // Display the current question and options
   questionElement.innerText = questions[index].question;
@@ -45,7 +46,15 @@ function showQuestion(index) {
         `;
   });
 
-  nextButton.style.display = "none";
+  volgendeKnop.style.display = "none";
+  updateProgressBar(); // Update progress bar when showing question
+}
+
+// Function to update progress bar
+function updateProgressBar() {
+  const progressElement = document.getElementById("progress");
+  const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100; // Calculate percentage
+  progressElement.style.width = progressPercentage + "%"; // Update progress bar width
 }
 
 function checkAntwoord(knop) {
@@ -68,15 +77,15 @@ function checkAntwoord(knop) {
 }
 
 function naarVolgendeVraag() {
-  if (currentQuestionIndex !== 10) {
-    currentQuestionIndex = currentQuestionIndex + 1;
+  if (currentQuestionIndex < questions.length - 1) {
+    currentQuestionIndex += 1; // Increment question index
     let vraagNummerText = document.getElementById("vraagNummer");
     let volgendeKnop = document.getElementById("volgendeKnop");
 
     vraagNummerText.textContent = "Vraag " + (currentQuestionIndex + 1);
     volgendeKnop.style.display = "none";
     beantwoord = false;
-    showQuestion(currentQuestionIndex);
+    showQuestion(currentQuestionIndex); // Show the next question
   }
 }
 

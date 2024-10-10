@@ -239,3 +239,18 @@
 .fouteAntwoord {
   background-color: red;
 }
+
+.progress-bar {
+  width: 60%;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  height: 20px;
+  margin-top: 100px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #ffab5c;
+  border-radius: 5px;
+  transition: width 0.3s ease;
+}
